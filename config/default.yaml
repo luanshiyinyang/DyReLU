@@ -1,0 +1,15 @@
+dataset:
+  name: Caltech256  # Caltech101 or Caltech256
+  folder: /media/zhouchen/ZC/Dataset/Caltech256/256_ObjectCategories
+  split: "8:1:1"  # use format like a:b:c
+  txt_path: ../dataset/
+
+training:
+  lr: 0.001
+  epochs: 50
+  batch_size: 32
+  model: resnet-dyrelu
+  device: 1
+
+exp:
+  name: exp-resnet50-dyrelu # default is None
