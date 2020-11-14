@@ -22,3 +22,11 @@ python dataset_preprocess.py
 ```python
 python train.py
 ```
+
+## 结果
+
+对比如下。
+
+![](./assets/training_loss.png)
+
+![](./assets/validation_loss.png)
