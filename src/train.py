@@ -24,14 +24,14 @@ def train_epoch(epoch):
         x, y = x.to(config.device), y.to(config.device)
         pred = model(x)
         loss = criterion(pred, y)
-        losses += loss
+        losses += loss.cpu().detach().numpy()
         optimizer.zero_grad()
         loss.backward()
         optimizer.step()
 
         if step % 100 == 0:
             logx.msg("epoch {} step {} training loss {}".format(epoch, step, loss.item()))
-    logx.msg("epoch {} training loss {}".format(epoch, losses))
+    logx.msg("epoch {} training loss {}".format(epoch, losses / (step + 1)))
     logx.metric("train", {"loss": losses / (step + 1)})
     return losses
 
@@ -44,11 +44,11 @@ def test_epoch(epoch):
             x, y = x.to(config.device), y.to(config.device)
             pred = model(x)
             loss = criterion(pred, y)
-            losses += loss
+            losses += loss.cpu().detach().numpy()
     save_dict = {
         'state_dict': model.state_dict()
     }
-    logx.msg("epoch {} validation loss {}".format(epoch, losses))
+    logx.msg("epoch {} validation loss {}".format(epoch, losses / (step + 1)))
     logx.metric('val', {'loss': losses / (step + 1)})
     logx.save_model(save_dict, losses, epoch, higher_better=False, delete_old=True)
 
@@ -70,7 +70,7 @@ else:
 model = model.to(config.device)
 
 criterion = nn.CrossEntropyLoss()
-optimizer = optim.SGD(model.parameters(), lr=0.001, momentum=0.9, nesterov=True)
+optimizer = optim.Adam(model.parameters(), lr=0.001)
 
 for i in range(config.epochs):
     train_epoch(i)

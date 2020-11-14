@@ -4,3 +4,4 @@ try*
 .vscode/
 __pycache__
 dataset/
+runs/

@@ -8,8 +8,8 @@ training:
   lr: 0.001
   epochs: 50
   batch_size: 32
-  model: resnet-dyrelu
+  model: resnet
   device: 1
 
 exp:
-  name: exp-resnet50-dyrelu # default is None
+  name: exp-resnet # default is None
