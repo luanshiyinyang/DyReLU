@@ -6,10 +6,10 @@ dataset:
 
 training:
   lr: 0.001
-  epochs: 50
+  epochs: 30
   batch_size: 32
-  model: resnet
-  device: 1
+  model: resnet-dyrelu
+  device: 0
 
 exp:
-  name: exp-resnet # default is None
+  name: exp-resnet-dyrerlu # default is None
